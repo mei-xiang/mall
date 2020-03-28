@@ -1,11 +1,20 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <tabbar></tabbar>
+  </div>
 </template>
 
 <script>
+import Tabbar from 'components/tabbar/Tabbar.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Tabbar: Tabbar
+  }
 }
 </script>
 
-<style></style>
+<style lang="less">
+@import 'assets/css/normalize.css';
+@import 'assets/css/base.css';
+</style>
