@@ -1,15 +1,39 @@
 <template>
   <div id="app">
-    <tabbar></tabbar>
+    <router-view />
+    <tabbar>
+      <tabbar-item path="/home" activeColor="#f57880">
+        <img src="~assets/img/tabbar/home.svg" alt slot="item-icon" />
+        <img src="~assets/img/tabbar/home_active.svg" alt slot="item-active-icon" />
+        <p slot="item-text" >首页</p>
+      </tabbar-item>
+      <tabbar-item path="/category" activeColor="#f57880">
+        <img src="~assets/img/tabbar/category.svg" alt slot="item-icon" />
+        <img src="~assets/img/tabbar/category_active.svg" alt slot="item-active-icon" />
+        <p slot="item-text" >分类</p>
+      </tabbar-item>
+      <tabbar-item path="/shopcart" activeColor="#f57880">
+        <img src="~assets/img/tabbar/shopcart.svg" alt slot="item-icon" />
+        <img src="~assets/img/tabbar/shopcart_active.svg" alt slot="item-active-icon" />
+        <p slot="item-text" >购物车</p>
+      </tabbar-item>
+      <tabbar-item path="/profile" activeColor="#f57880">
+        <img src="~assets/img/tabbar/profile.svg" alt slot="item-icon" />
+        <img src="~assets/img/tabbar/profile_active.svg" alt slot="item-active-icon" />
+        <p slot="item-text" >我的</p>
+      </tabbar-item>
+    </tabbar>
   </div>
 </template>
 
 <script>
-import Tabbar from 'components/tabbar/Tabbar.vue'
+import Tabbar from 'components/common/tabbar/Tabbar.vue'
+import TabbarItem from 'components/common/tabbar/TabbarItem'
 export default {
   name: 'App',
   components: {
-    Tabbar: Tabbar
+    Tabbar: Tabbar,
+    TabbarItem: TabbarItem
   }
 }
 </script>
@@ -17,4 +41,5 @@ export default {
 <style lang="less">
 @import 'assets/css/normalize.css';
 @import 'assets/css/base.css';
+
 </style>
