@@ -18,13 +18,4 @@ export default {}
   box-shadow: 0 -1px 10px rgba(100, 100, 100, 0.2);
   display: flex;
 }
-.tabbar-item {
-  flex: 1;
-  text-align: center;
-  height: 49px;
-}
-.tabbar-item img {
-  width: 24px;
-  height: 24px;
-}
 </style>

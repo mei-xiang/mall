@@ -7,18 +7,32 @@
   box-sizing: border-box;
 }
 
-body{
+body {
   font-size: 14px;
-  font-family: 'microsoft','微软雅黑';
+  font-family: 'microsoft', '微软雅黑';
+}
+body,
+html {
+  width: 100%;
+  height: 100%;
 }
 
-.clearfix {
+/* .clearfix::after{
   content: '';
   height: 0;
   width: 0;
   display: block;
   clear: both;
   visibility: hidden;
+} */
+.clearFix::before,
+.clearFix::after {
+  content: '';
+  display: block;
+  height: 0;
+  line-height: 0;
+  visibility: hidden;
+  clear: both;
 }
 
 input,

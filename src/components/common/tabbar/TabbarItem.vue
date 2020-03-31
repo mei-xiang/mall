@@ -15,7 +15,15 @@
 
 <script>
 export default {
-  props: ['path', 'activeColor'],
+  props: {
+    path: String,
+    activeColor: {
+      type: String,
+      default: function() {
+        return '#f57880'
+      }
+    }
+  },
   data() {
     return {}
   },
