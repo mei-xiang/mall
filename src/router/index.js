@@ -9,13 +9,41 @@ const Profile = () => import('@/views/profile/Profile')
 Vue.use(RouterVue)
 
 const router = new RouterVue({
-  mode: 'history',
+  mode: 'history', // history模式
   routes: [
     { path: '/', redirect: '/home/' },
-    { path: '/home', component: Home },
-    { path: '/category', component: Category },
-    { path: '/shopcart', component: Shopcart },
-    { path: '/profile', component: Profile }
+    {
+      path: '/home',
+      name: 'home',
+      meta: {
+        keepAlive: true
+      },
+      component: Home
+    },
+    {
+      name: 'category',
+      path: '/category',
+      meta: {
+        keepAlive: true
+      },
+      component: Category
+    },
+    {
+      name: 'shopcart',
+      path: '/shopcart',
+      meta: {
+        keepAlive: true
+      },
+      component: Shopcart
+    },
+    {
+      name: 'profile',
+      path: '/profile',
+      meta: {
+        keepAlive: true
+      },
+      component: Profile
+    }
   ]
 })
 

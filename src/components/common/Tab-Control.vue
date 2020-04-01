@@ -1,5 +1,5 @@
 <template>
-  <div class="tab_control">
+  <div class="tab_control" ref="tabControl">
     <ul class="clearFix">
       <li v-for="(item, index) in titles" :key="index" @click="tap(index)">
         <span :class="{isActive: index===currentIndex}">{{item}}</span>
@@ -23,6 +23,9 @@ export default {
       }
     }
   },
+  mounted() {
+    // console.log(this.$refs.tabControl.offsetTop)
+  },
   methods: {
     tap(index) {
       this.currentIndex = index
@@ -34,15 +37,16 @@ export default {
 
 <style lang="less">
 .tab_control {
-  margin-top: 15px;
   background-color: #fff;
   z-index: 8;
   ul {
+    margin-bottom: 8px;
     li {
       float: left;
       width: 33.33333%;
       height: 40px;
       text-align: center;
+      line-height: 40px;
       span {
         font-size: 16px;
         padding: 10px;

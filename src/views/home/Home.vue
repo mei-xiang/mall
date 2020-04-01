@@ -4,17 +4,24 @@
     <navbar class="navabr">
       <div slot="nav_center" class="nav_center">购物街</div>
     </navbar>
+    <tab-control
+      :titles="['流行','新款','精选']"
+      @tagclick="tagClick"
+      ref="tabControlRef1"
+      class="tabControl1"
+      v-show="isShowTab"
+    ></tab-control>
 
     <!-- 滚动区域 -->
     <scroll class="scroll" ref="scroll" @positionscroll="positionscroll" @pullingup="pullingup">
       <!-- 轮播图 -->
-      <home-swiper :banners="banners"></home-swiper>
+      <home-swiper :banners="banners" @swiperImgLoad="swiperImgLoad"></home-swiper>
       <!-- 推荐 -->
       <home-recommend :recommend="recommend"></home-recommend>
       <!-- 本周流行 -->
       <home-feature-view></home-feature-view>
       <!-- 商品类别 -->
-      <tab-control :titles="['流行','新款','精选']" @tagclick="tagClick" class="tab_control"></tab-control>
+      <tab-control :titles="['流行','新款','精选']" @tagclick="tagClick" ref="tabControlRef"></tab-control>
       <!-- 商品列表 -->
       <good-list :goodlist="goodType"></good-list>
     </scroll>
@@ -64,15 +71,30 @@ export default {
         }
       },
       currentType: 'pop', // 当前商品数据的类别
-      isShowBackTop: false
+      isShowBackTop: false,
+      offsetTop: 0,
+      isShowTab: false, // 吸顶效果
+      saveY: 0 // 保持位置
     }
   },
+  // destroyed() {
+  //   console.log('销毁了')
+  // },
+  // 进入时触发
   created() {
     // 获取轮播数据和推荐数据
     this.getAllHomeData()
     this.getAllHomeGoodss('pop', 1)
     this.getAllHomeGoodss('new', 1)
     this.getAllHomeGoodss('sell', 1)
+  },
+  mounted() {
+    // // 通过EventBus注册事件
+    // this.$bus.$on('imgLoaded', () => {
+    //   // 图片加载完毕调用滚动插件实例的refresh，
+    //   this.$refs.scroll.scroll.refresh()
+    // })
+    // console.log(this.$refs.scroll.$el === this.$refs.scroll.$refs.wrapperRef)
   },
   components: {
     Navbar: Navbar,
@@ -133,6 +155,10 @@ export default {
           this.currentType = 'sell'
           break
       }
+      this.$refs.tabControlRef.currentIndex = index
+      this.$refs.tabControlRef1.currentIndex = index
+
+      /** todos ----bug  添加了吸附功能后，点击pop,new,sell不同的类别，在每个类别都是获取的不同的页数对应的位置。现在当我们切换类别时，不能保持之前类别对应的滚动位置。解决办法：在每次点击类别时都记录好对应类别滚动的位置（实例.y获取滚动的位置），下次切换这个类别就会自动对应过去 */
     },
     // 返回顶部
     backTop() {
@@ -147,18 +173,27 @@ export default {
       } else {
         this.isShowBackTop = false
       }
+      // console.log(this.$refs.tabControlRef.$el.offsetTop)
+      // console.log(-position.y)
+      this.isShowTab = -position.y > this.offsetTop
     },
     // 上拉加载
     pullingup() {
-      console.log('上拉加载更多数据')
       this.getAllHomeGoodss(this.currentType)
 
       this.$refs.scroll.scroll.finishPullUp()
 
       // BSscroll实例中DOM结构发生变化，需要重新计算
+      // 1. 使用this.$nextTick() DOM加载完毕后再执行,调用refresh()
+      // 2. 监听图片加载事件@load，每次加载完成调用refresh()
       this.$nextTick(() => {
         this.$refs.scroll.scroll.refresh()
       })
+    },
+    // 轮播中的图片加载完毕，获取tab-control offsetTop的距离
+    swiperImgLoad() {
+      this.offsetTop = this.$refs.tabControlRef.$el.offsetTop - 44
+      this.flag = true
     }
   }
 }
@@ -168,19 +203,21 @@ export default {
 .home {
   padding-top: 44px;
   height: 100%;
-  height: 100vh;
+  height: 100%;
   padding-bottom: 49px;
 }
 .navabr {
   font-size: 18px;
   background-color: #ff8a9d;
 }
-.tab_control {
-  position: sticky;
-  top: 44px;
-}
 .scroll {
   width: 100%;
   height: 100%;
+}
+.tabControl1 {
+  position: fixed;
+  top: 44px;
+  left: 0;
+  right: 0;
 }
 </style>

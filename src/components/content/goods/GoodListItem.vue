@@ -1,5 +1,6 @@
 <template>
   <div class="good_list_item">
+    <!-- @load="imgLoad" 监听图片加载事件 -->
     <img :src="goodlistitem.show.img" alt />
     <p>{{goodlistitem.title}}</p>
     <span>{{goodlistitem.orgPrice}}</span>
@@ -15,6 +16,12 @@ export default {
       default: function() {
         return {}
       }
+    }
+  },
+  methods: {
+    imgLoad() {
+      // 使用EventBus事件总线，将事件发送过去
+      this.$bus.$emit('imgLoaded')
     }
   }
 }
