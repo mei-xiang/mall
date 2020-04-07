@@ -15,14 +15,20 @@
       </a>
     </div>
     <div class="right">
-      <a href="javascript:;" class="cart">加入购物车</a>
+      <a href="javascript:;" class="cart" @click="addCart">加入购物车</a>
       <a href="javascript:;" class="buy">立即购买</a>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    addCart() {
+      this.$emit('addCart')
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>

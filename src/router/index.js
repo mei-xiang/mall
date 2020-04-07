@@ -3,7 +3,7 @@ import RouterVue from 'vue-router'
 
 const Home = () => import('@/views/home/Home')
 const Category = () => import('@/views/category/Category')
-const Shopcart = () => import('@/views/shopcart/Shopcart')
+const Cart = () => import('@/views/cart/Cart')
 const Profile = () => import('@/views/profile/Profile')
 const Detail = () => import('@/views/detail/Detail')
 
@@ -30,12 +30,12 @@ const router = new RouterVue({
       component: Category
     },
     {
-      name: 'shopcart',
-      path: '/shopcart',
+      name: 'cart',
+      path: '/cart',
       meta: {
         keepAlive: true
       },
-      component: Shopcart
+      component: Cart
     },
     {
       name: 'profile',

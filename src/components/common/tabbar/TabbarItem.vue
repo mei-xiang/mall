@@ -43,6 +43,7 @@ export default {
 
 <style lang="less" scoped>
 .tabbar-item {
+  width: 100vw;
   flex: 1;
   text-align: center;
   height: 49px;

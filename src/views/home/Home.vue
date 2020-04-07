@@ -227,7 +227,7 @@ export default {
 .home {
   padding-top: 44px;
   height: 100%;
-  height: 100%;
+  width: 100%;
   padding-bottom: 49px;
 }
 .navabr {

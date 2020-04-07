@@ -11,7 +11,7 @@
       <good-list ref="recommend" :goodlist="recommend"></good-list>
     </scroll>
 
-    <detail-bottom-bar></detail-bottom-bar>
+    <detail-bottom-bar @addCart="addCart"></detail-bottom-bar>
     <back-top v-if="isShow" @click.native="backTop"></back-top>
   </div>
 </template>
@@ -61,7 +61,7 @@ export default {
     this.getDetailList(this.iid)
     // 获取商品推荐数据
     getDetailRate().then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.data.success === true) {
         this.recommend = res.data.data.list
       }
@@ -91,7 +91,7 @@ export default {
     getDetailList(iid) {
       getDetailList(iid).then(res => {
         if (res.data.status.code === 1001) {
-          // console.log(res)
+          console.log(res)
           // 获取轮播图数据
           this.swiperImg = res.data.result.itemInfo.topImages
           const data = res.data.result
@@ -150,6 +150,18 @@ export default {
       }
 
       this.isShow = -position.y > 1000
+    },
+    addCart() {
+      // 添加购物车
+      const cart = {}
+      cart.title = this.goods.title
+      cart.lowNowPrice = this.goods.lowNowPrice
+      cart.desc = this.goods.desc
+      cart.swiperImg = this.swiperImg[0]
+      cart.iid = this.iid
+      // console.log(cart)
+      // 将数据添加到Vuex中。添加数据会进行判断要是state中有数据的话数量+1，没数据的话进行添加数据并且设置数量初始值1。这是两件事，mutations中是修改数据状态，每个函数完成的功能尽可能单一。所有使用dispatch分发给actions再交给mutations修改数据
+      this.$store.dispatch('addCart', cart)
     }
   }
 }

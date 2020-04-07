@@ -10,6 +10,7 @@ export default {}
 
 <style lang="less" scoped>
 .tabbar {
+  width: 100vw;
   position: fixed;
   left: 0;
   right: 0;

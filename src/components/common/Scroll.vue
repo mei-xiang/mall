@@ -47,5 +47,6 @@ export default {
 .wrapper {
   // vh 视口（屏幕）高度
   height: 100vh;
+  width: 100vw;
 }
 </style>

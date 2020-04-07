@@ -10,7 +10,7 @@
       <img src="~assets/img/tabbar/category_active.svg" alt slot="item-active-icon" />
       <p slot="item-text">分类</p>
     </tabbar-item>
-    <tabbar-item path="/shopcart" activeColor="#f57880">
+    <tabbar-item path="/cart" activeColor="#f57880">
       <img src="~assets/img/tabbar/shopcart.svg" alt slot="item-icon" />
       <img src="~assets/img/tabbar/shopcart_active.svg" alt slot="item-active-icon" />
       <p slot="item-text">购物车</p>
@@ -38,5 +38,6 @@ export default {
 <style lang="less" scoped>
 .tabbar{
   padding-top: 6px;
+  width: 100vw;
 }
 </style>

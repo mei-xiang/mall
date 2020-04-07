@@ -18,6 +18,7 @@ export default {}
 
 <style lang="less" scoped>
 .navbar {
+  width: 100vw;
   height: 44px;
   display: flex;
   line-height: 44px;
