@@ -5,6 +5,7 @@ const Home = () => import('@/views/home/Home')
 const Category = () => import('@/views/category/Category')
 const Shopcart = () => import('@/views/shopcart/Shopcart')
 const Profile = () => import('@/views/profile/Profile')
+const Detail = () => import('@/views/detail/Detail')
 
 Vue.use(RouterVue)
 
@@ -43,6 +44,14 @@ const router = new RouterVue({
         keepAlive: true
       },
       component: Profile
+    },
+    {
+      name: 'detail',
+      path: '/detail/:iid',
+      meta: {
+        keepAlive: false
+      },
+      component: Detail
     }
   ]
 })

@@ -1,8 +1,10 @@
 <template>
   <div>
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="(item, index) in banners" :key="index">
-        <img :src="item.image" alt @load="imgLoad" />
+      <van-swipe-item v-for="(item, index) in swiperImg" :key="index">
+        <a href="javascript:;">
+          <img :src="item" alt />
+        </a>
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -10,25 +12,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isFlag: false
-    }
-  },
   props: {
-    banners: {
+    swiperImg: {
       type: Array,
       default: function() {
         return []
-      }
-    }
-  },
-  methods: {
-    imgLoad() {
-      // 告诉父组件图片加载完毕
-      if (!this.isFlag) {
-        this.$emit('swiperImgLoad')
-        this.isFlag = true
       }
     }
   }
@@ -38,8 +26,7 @@ export default {
 <style lang="less" scoped>
 .van-swipe {
   width: 100%;
-  height: 200px;
-  background-color: pink;
+  height: 300px;
   .van-swipe-item {
     width: 100%;
     height: 100%;

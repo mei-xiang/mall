@@ -5,7 +5,7 @@
       <div slot="nav_center" class="nav_center">购物街</div>
     </navbar>
     <tab-control
-      :titles="['流行','新款','精选']"
+      :titles="['流行', '新款', '精选']"
       @tagclick="tagClick"
       ref="tabControlRef1"
       class="tabControl1"
@@ -13,15 +13,27 @@
     ></tab-control>
 
     <!-- 滚动区域 -->
-    <scroll class="scroll" ref="scroll" @positionscroll="positionscroll" @pullingup="pullingup">
+    <scroll
+      class="scroll"
+      ref="scroll"
+      @positionscroll="positionscroll"
+      @pullingup="pullingup"
+    >
       <!-- 轮播图 -->
-      <home-swiper :banners="banners" @swiperImgLoad="swiperImgLoad"></home-swiper>
+      <home-swiper
+        :banners="banners"
+        @swiperImgLoad="swiperImgLoad"
+      ></home-swiper>
       <!-- 推荐 -->
       <home-recommend :recommend="recommend"></home-recommend>
       <!-- 本周流行 -->
       <home-feature-view></home-feature-view>
       <!-- 商品类别 -->
-      <tab-control :titles="['流行','新款','精选']" @tagclick="tagClick" ref="tabControlRef"></tab-control>
+      <tab-control
+        :titles="['流行', '新款', '精选']"
+        @tagclick="tagClick"
+        ref="tabControlRef"
+      ></tab-control>
       <!-- 商品列表 -->
       <good-list :goodlist="goodType"></good-list>
     </scroll>
@@ -95,7 +107,19 @@ export default {
     //   this.$refs.scroll.scroll.refresh()
     // })
     // console.log(this.$refs.scroll.$el === this.$refs.scroll.$refs.wrapperRef)
+    this.$refs.scroll.scroll.refresh() // 重新计算滚动的高度
   },
+  // 使用keep-alive切换路由状态没有保持时，使用activated和deactivated记录位置滚动
+  // activated() {
+  //   console.log('activated进入了')
+  //   // 将上一次离开时的值赋值给当前进入时滚动的值
+  //   this.$refs.scroll.scroll.scrollTo(0, this.saveY)
+  // },
+  // deactivated() {
+  //   console.log('deactivated离开了')
+  //   // 获取离开时滚动的位置，进行保存
+  //   this.saveY = this.$refs.scroll.scroll.y
+  // },
   components: {
     Navbar: Navbar,
     HomeSwiper: HomeSwiper,

@@ -36,4 +36,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.tabbar{
+  padding-top: 6px;
+}
 </style>

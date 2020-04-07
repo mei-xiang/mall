@@ -13,6 +13,7 @@ module.exports = {
     // 方法名和括号之间不加空格
     'space-before-function-paren': 0,
     // 文件最后一行要加一行
-    'eol-last': 0
+    'eol-last': 0,
+    'prefer-const': 0
   }
 }

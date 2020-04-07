@@ -27,7 +27,11 @@ export default {
     })
 
     this.scroll.on('scroll', position => {
-      this.$emit('positionscroll', position)
+      if (this.$route.path.indexOf('/home') !== -1) {
+        this.$emit('positionscroll', position)
+      } else if (this.$route.path.indexOf('/detail') !== -1) {
+        this.$emit('detailScroll', position)
+      }
     })
 
     this.scroll.on('pullingUp', () => {
