@@ -129,13 +129,6 @@ export default {
     /**
      * 网络数据请求
      */
-    // getAllHomeData() {
-    //   axios
-    //     .get('http://152.136.185.210:8000/api/h3/home/multidata')
-    //     .then(res => {
-    //       console.log(res)
-    //     })
-    // }
     getAllHomeData() {
       getAllHomeData().then(res => {
         if (res.data.success === true) {

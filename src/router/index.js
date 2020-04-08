@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import RouterVue from 'vue-router'
 
+const originalPush = RouterVue.prototype.push
+RouterVue.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 const Home = () => import('@/views/home/Home')
 const Category = () => import('@/views/category/Category')
 const Cart = () => import('@/views/cart/Cart')

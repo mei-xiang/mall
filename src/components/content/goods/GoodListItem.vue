@@ -1,7 +1,8 @@
 <template>
   <div class="good_list_item" v-if="Object.keys(goodlistitem).length!==0">
     <!-- @load="imgLoad" 监听图片加载事件 -->
-    <img :src="goodlistitemImg" alt @click="jumpDetails(goodlistitem.iid||goodlistitem.item_id)" />
+    <!-- 修改图片显示方式未懒加载 将:src 替换成v-lazy -->
+    <img v-lazy="goodlistitemImg" alt @click="jumpDetails(goodlistitem.iid||goodlistitem.item_id)" />
     <p>{{goodlistitem.title}}</p>
     <span>{{goodlistitem.price}}</span>
     <span>{{goodlistitem.cfav}}</span>
@@ -38,6 +39,7 @@ export default {
       this.$bus.$emit('imgLoaded')
     },
     jumpDetails(iid) {
+      // 这里可能实现功能需要修改，将事件传给父组件，让父组件进行跳转
       this.$router.push({
         name: 'detail',
         params: {
