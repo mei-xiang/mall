@@ -53,18 +53,13 @@ export default {
   margin-bottom: 10px;
   .checkout {
     border-radius: 50%;
+    display: flex;
     position: absolute;
     overflow: hidden;
-    padding: 2px;
     left: 15px;
     top: 35px;
     border: 2px solid #aaa;
     background-color: #fff;
-    img {
-      transform: translateY(2px);
-      width: 12px;
-      height: 12px;
-    }
     &.active {
       border: 2px solid #1989fa;
       background-color: #1989fa;

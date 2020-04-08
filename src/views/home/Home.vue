@@ -13,29 +13,17 @@
     ></tab-control>
 
     <!-- 滚动区域 -->
-    <scroll
-      class="scroll"
-      ref="scroll"
-      @positionscroll="positionscroll"
-      @pullingup="pullingup"
-    >
+    <scroll class="scroll" ref="scroll" @positionscroll="positionscroll" @pullingup="pullingup">
       <!-- 轮播图 -->
-      <home-swiper
-        :banners="banners"
-        @swiperImgLoad="swiperImgLoad"
-      ></home-swiper>
+      <home-swiper :banners="banners" @swiperImgLoad="swiperImgLoad"></home-swiper>
       <!-- 推荐 -->
       <home-recommend :recommend="recommend"></home-recommend>
       <!-- 本周流行 -->
       <home-feature-view></home-feature-view>
       <!-- 商品类别 -->
-      <tab-control
-        :titles="['流行', '新款', '精选']"
-        @tagclick="tagClick"
-        ref="tabControlRef"
-      ></tab-control>
+      <tab-control :titles="['流行', '新款', '精选']" @tagclick="tagClick" ref="tabControlRef"></tab-control>
       <!-- 商品列表 -->
-      <good-list :goodlist="goodType"></good-list>
+      <good-list :goodlist="goodType" ref="list"></good-list>
     </scroll>
 
     <!-- 返回顶部 -->
@@ -86,7 +74,9 @@ export default {
       isShowBackTop: false,
       offsetTop: 0,
       isShowTab: false, // 吸顶效果
-      saveY: 0 // 保持位置
+      saveY: 0, // 保持位置
+      list: 0,
+      stateKeep: [0, 0, 0] // 记录3个不同类别的高度
     }
   },
   // destroyed() {
@@ -182,6 +172,10 @@ export default {
       this.$refs.tabControlRef.currentIndex = index
       this.$refs.tabControlRef1.currentIndex = index
 
+      if (this.isShowTab) {
+        this.$refs.scroll.scroll.scrollTo(0, -this.list)
+      }
+
       /** todos ----bug  添加了吸附功能后，点击pop,new,sell不同的类别，在每个类别都是获取的不同的页数对应的位置。现在当我们切换类别时，不能保持之前类别对应的滚动位置。解决办法：在每次点击类别时都记录好对应类别滚动的位置（实例.y获取滚动的位置），下次切换这个类别就会自动对应过去 */
     },
     // 返回顶部
@@ -218,6 +212,7 @@ export default {
     swiperImgLoad() {
       this.offsetTop = this.$refs.tabControlRef.$el.offsetTop - 44
       this.flag = true
+      this.list = this.$refs.list.$el.offsetTop - 92
     }
   }
 }

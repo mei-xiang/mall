@@ -91,7 +91,7 @@ export default {
     getDetailList(iid) {
       getDetailList(iid).then(res => {
         if (res.data.status.code === 1001) {
-          console.log(res)
+          // console.log(res)
           // 获取轮播图数据
           this.swiperImg = res.data.result.itemInfo.topImages
           const data = res.data.result
@@ -161,7 +161,13 @@ export default {
       cart.iid = this.iid
       // console.log(cart)
       // 将数据添加到Vuex中。添加数据会进行判断要是state中有数据的话数量+1，没数据的话进行添加数据并且设置数量初始值1。这是两件事，mutations中是修改数据状态，每个函数完成的功能尽可能单一。所有使用dispatch分发给actions再交给mutations修改数据
-      this.$store.dispatch('addCart', cart)
+
+      // 修改了vuex中的数据要想知道操作是否完成，使用actions返回的promise对象。然后调用/then拿到操作的结果
+      // actions会返回一个promise对象。
+      this.$store.dispatch('addCart', cart).then(res => {
+        // console.log(res)
+        this.$toast(res)
+      })
     }
   }
 }
