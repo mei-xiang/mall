@@ -4,6 +4,7 @@ import router from './router/index'
 import store from './store/index'
 import fastClick from 'fastclick'
 import VueLazyload from 'vue-lazyload'
+import './common/rem' // 引入移动端适配处理
 // import toast from 'components/common/toast/Toast'
 
 // 添加vant ui
@@ -17,7 +18,7 @@ Vue.use(Icon)
 Vue.use(Toast)
 Vue.use(VueLazyload)
 
-// 安装封装的toast插件
+// 安装自己封装的toast插件
 // Vue.use(Toast)
 
 // 解决移动端300ms延迟

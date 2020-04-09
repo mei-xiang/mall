@@ -1,9 +1,24 @@
-/**
- * 公共的工具方法
- */
+// 公共的工具方法
 
 /**
- *
+ * 封装的防抖函数
+ * @param {Function} func 要做防抖的函数
+ * @param {Number} delay  限制时间
+ */
+export function debounce(func, delay) {
+  let timer = null
+  return function(...args) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, delay)
+  }
+}
+
+/**
+ * 格式化时间
  * @param {String} fmt
  * @param {Object} date
  * let date = new Date()
